@@ -1,0 +1,28 @@
+<h4>NPM</h4>
+<p>When building with ColonJs, it is recommended that you use the NPM installation method. It works well with module bundlers like <a href="https://webpack.js.org/" target="_blank">Webpack</a>.</p>
+
+<pre class="hljs bash">
+	$ npm install colonjs
+</pre>
+
+<h4> Direct <code>&lt;script&gt;</code> Include </h4>
+<p>Download ColonJs and include with a script tag. <code>Colon</code> will be registered as a global variable. Get latest version <a href='https://cdn.jsdelivr.net/npm/colonjs' target="_blank">here</a>.</p>
+
+<h4> CDN: </h4>
+<p>Use the following code with the latest version for prototyping or for learning purposes:</p>
+<pre class="hljs html">
+	&lt;script src="https://cdn.jsdelivr.net/npm/colonjs"&gt;&lt;/script&gt;
+</pre>
+
+<p>During production, link to and build off of a specific version number to avoid breakage from more recent versions:</p>
+<pre class="hljs html">
+	&lt;script src="https://cdn.jsdelivr.net/npm/colonjs@0.0.14"&gt;&lt;/script&gt;
+</pre>
+
+<p>For native ES Modules, use the following compatible build:</p>
+<pre class="hljs html">
+	&lt;script type="module"&gt;
+		import Colon from 'https://cdn.jsdelivr.net/npm/colonjs/dist/colon.esm.min.js'  
+	&lt;/script&gt;
+</pre>
+<p>As an alternative to Jsdelivr CDN ColonJs is also available on <a href= 'https://unpkg.com/colonjs' target="_blank">unpkg</a> CDN.</p>

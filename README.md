@@ -1,3 +1,0 @@
-# colonjs.org
-
-Hello world

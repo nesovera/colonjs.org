@@ -1,0 +1,19 @@
+{
+  "name": "colonjs.org",
+  "version": "0.0.1",
+  "description": "ColonJs.org Website",
+  "main": "index.js",
+  "scripts": {
+    "live": "live-server --entry-file=index.html"
+  },
+  "author": "Neso Vera",
+  "license": "MIT",
+  "homepage": "https://colonjs.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nesovera/colonjs.org.git"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}

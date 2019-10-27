@@ -1,0 +1,294 @@
+<h4>What is ColonJs?</h4>
+<p>ColonJs is a micro front end framework (only 3kb gzipped) and is similar to Vue.js. It can provide a lower weight alternative for simple projects, and may even be faster than other frameworks due to its tiny footprint. </p>
+
+<p><b>Compatibility Note</b></p>
+<p>ColonJs does not support IE8 and below; however, it does support all <a href="https://caniuse.com/#feat=es5" target="_blank">ECMAScript 5 compliant browsers</a>.</p>
+
+<p><b>Getting Started</b></p>
+<p>For detailed installation instructions, go to <a href="/v0/installation">Installation</a></p>
+<p>The easiest way to get familiar with ColonJs is by experimenting with this demo: <a href="https://htmlpen.com/nesovera/colonjs-hello-world/editor/" target="_blank">ColonJs #1: Hello World</a>. </p>
+<p>To start, add the following code to your page:</p>
+<pre class="hljs html">
+&lt;script src="https://cdn.jsdelivr.net/npm/colonjs"&gt;&lt;/script&gt;
+</pre>
+<p>You can find more options for installing ColonJs on the <a href="/v0/installation">Installation</a> page.</p>
+
+<h4>Declarative Rendering</h4>
+<p>ColonJs makes it easy to declaratively render data to the DOM:</p>
+<pre class="hljs html">
+&lt;div id="example1"&gt;
+  &lt;span :text="$data.message">&lt;/span&gt;
+&lt;/div&gt;
+</pre>
+<pre class="hljs javascript">
+var example1 = new Colon({  
+	el: '#example1',  
+	data: {
+		message: 'Hello World!' 
+	}
+})
+</pre>
+<hr/>
+<div>
+	<div id="example1">
+		<span :text="$data.message"></span>
+	</div>
+	<script class="run">
+		window.example1 = new Colon({  
+			el: '#example1',
+			data: {  
+				message: 'Hello World!' 
+			}
+		});
+	</script>
+</div>
+<hr/>
+<p>Here we have rendered a string template, as well as linked the data to the DOM so that the message is reactive. To test it out, open the JavaScript console and adjust the value by running </p>
+<pre class="hljs javascript">
+example1.render($app=>{ $app.data.message = "Hello ColonJs" })
+</pre>
+<p>You should see the change reflected in the message.</p>
+
+<h4>Binding Attributes</h4>
+<p>ColonJs can also be used to bind element attributes:</p>
+
+<pre class="hljs html">
+&lt;div id="example2"&gt;
+	&lt;span :title="$data.message"&gt;
+		Hover your mouse over me for a few seconds  to see my dynamically bound title! 
+	&lt;/span&gt;  
+&lt;/div&gt;  
+</pre>
+<pre class="hljs javascript">
+var example2 = new Colon({  
+	el: '#example2',
+	data: {  
+		message: 'You loaded this page on ' + new  Date().toLocaleString()  
+	} 
+})
+</pre>
+<hr/>
+<div>
+	<div id="example2">
+		<span :title="$data.message"> Hover to see a dynamically bound title</span> 
+	</div>  
+	<script class="run">
+		window.example2 = new Colon({  
+			el: '#example2',
+			data: {  
+				message: 'You loaded this page on ' + new  Date().toLocaleString() 
+			} 
+		});
+	</script>
+</div>
+<hr/>
+<p>Attributes that starts with <b><code>:</code></b> are special attributes provided within ColonJS. They can be used to make a rendered DOM reactive, as shown in the above example. In the JavaScript console, enter the code below to see the bound HTML update accordingly.</p>
+<pre class="hljs javascript">
+example2.render($app=>{ $app.data.message = "New message" })
+</pre>
+
+<h4>Conditionals and Loops</h4>
+<p>The following example shows how to toggle the presence of an element using <code>:if</code> directive:</p>
+<pre class="hljs html">
+&lt;div id="example3"&gt;
+	&lt;span :if="$data.seen">Now you see me&lt;/span&gt;
+&lt;/div&gt;
+</pre>
+<pre class="hljs javascript">
+var example3 = new Colon({  
+	el: '#example3',  
+	data: {
+		seen: true 
+	}
+})
+</pre>
+<hr/>
+<div>
+	<div id="example3">
+		<span :if="$data.seen">Now you see me</span>
+	</div>
+	<script class="run">
+		window.example3 = new Colon({
+			el: '#example3',
+			data: {
+				seen: true 
+			}
+		});
+	</script>
+</div>
+<hr/>
+<p>To make the message disappear, enter the code below in the JavaScript console. Using ColonJs, data can be bound to the structure of the DOM, as well as to text and attributes.</p>
+<pre class="hljs javascript">
+example3.render($app=>{ $app.data.seen = false })
+</pre>
+
+<p>Use the <code>:for</code> directive to take data from an array and use it to display a list:</p>
+<pre class="hljs html">
+&lt;div id="example4"&gt;
+	&lt;ol&gt;
+		&lt;li :for="todo in $data.todos"&gt;
+			&lt;span :text="todo.text"&gt;&lt;/span&gt;
+		&lt;/li&gt;  
+	&lt;/ol&gt;
+&lt;/div&gt;
+</pre>
+<pre class="hljs javascript">
+var example4 = new Colon({  
+	el: '#example4',  
+	data: {
+		todos: [
+			{ text: 'Sit down' },
+			{ text: 'Learn ColonJs' },
+			{ text: 'Make the tiniest cool website' }
+		]  
+	} 
+});
+</pre>
+<hr/>
+<div>
+	<div id="example4">
+		<ol>
+			<li :for="todo in $data.todos"> 
+				<span :text="todo.text"></span> 
+			</li>  
+		</ol>
+	</div>
+	<script class="run">
+		window.example4 = new Colon({ 
+			el: '#example4',
+			data: {
+				todos: [
+					{ text: 'Sit down' },
+					{ text: 'Learn ColonJs' },
+					{ text: 'Make the tiniest cool website' }
+				]
+			}
+		});
+	</script>
+</div>
+<hr/>
+<p>To add a new item to the list, enter the code below into the JavaScript console.</p>
+<pre class="hljs javascript">
+example4.render($app=>{ $app.data.todos.push({ text: 'New item' }) })
+</pre>
+
+<h4>Handling User Input</h4>
+<p>Use the <code>@</code> directive to enable user interaction by attaching event listeners:</p>
+<pre class="hljs html">
+&lt;div id="example5"&gt; 
+	&lt;p :text="$data.message"&gt;&lt;/p&gt; 
+	&lt;button @click="$methods.reverseMessage()">Reverse Message&lt;/button&gt; 
+&lt;/div&gt;
+</pre>
+<hr/>
+<pre class="hljs javascript">
+var example5 = new Colon({  
+	el: '#example5',  
+	data: {  
+		message: 'Hello World' 
+	},  
+	methods: {  
+		reverseMessage: function () { 
+			this.data.message = this.data.message.split('').reverse().join('')  
+		}  
+	} 
+})
+</pre>
+<hr/>
+<div>
+	<div id="example5">  
+		<p :text="$data.message"></p>  
+		<button @click="$methods.reverseMessage()">Reverse Message</button>  
+	</div>
+	<script class="run">
+		window.example5 = new Colon({  
+			el: '#example5',
+			data: {  
+				message: 'Hello World' 
+			},  
+			methods: {  
+				reverseMessage: function () { 
+					this.data.message = this.data.message.split('').reverse().join('')  
+				}   
+			} 
+		});
+	</script>
+</div>
+<hr/>
+<p>ColonJs handles all DOM manipulations, so that apps can be updated without the need to interact with the DOM.</p>
+<p>Read the value from an input:</p>
+<pre class="hljs html">
+&lt;div id="example6"&gt;  
+	&lt;p :text="$data.message"&gt;&lt;/p&gt;  
+	&lt;input :value="$data.message" @input="$data.message = $this.value;" /&gt;  
+&lt;/div&gt;
+</pre>
+<pre class="hljs javascript">
+var example6 = new Colon({  
+	el: '#example6',
+	data: {  
+		message: 'Hello World' 
+	} 
+})
+</pre>
+<hr/>
+<div>
+	<div id="example6">  
+		<p :text="$data.message"></p>  
+		<input :value="$data.message" @input="$data.message = $this.value;" />  
+	</div>
+	<script class="run">
+		window.example6 = new Colon({  
+			el: '#example6',
+			data: {  
+				message: 'Hello World' 
+			} 
+		});
+	</script>
+</div>
+<hr/>
+<h4>Composing with Components</h4>
+<p>In ColonJs, a component is an instance of Colon. The component system enables large-scale applications to be built using small components that are self-contained and reusable. Here is how to register a component: </p>
+<pre class="hljs javascript">
+// Define a new component called todo-item 
+var TodoItem = {
+	template: '&lt;li :text="$props.item.text"&gt;&lt;/li&gt;'
+};
+
+var example6 = new Colon({
+	el: '#example6',
+	components:{
+		TodoItem:TodoItem,
+	},
+	data: {
+		todoList: [
+			{ id: 0, text: 'Sit down' },
+			{ id: 1, text: 'Learn ColonJs' },
+			{ id: 2, text: 'Make the tiniest cool website' }
+		]
+	},
+}
+</pre>	
+<p>Here is how to use the component:</p>
+<pre class="hljs html">
+&lt;div id="example6">
+	&lt;ol&gt;
+		&lt;template :for="todo in $data.todoList"&gt;
+			&lt;Todo-Item :item="todo"&gt;&lt;/Todo-Item&gt;
+		&lt;/template&gt;
+	&lt;/ol&gt;
+&lt;/div&gt;
+</pre>
+
+<p>Any attribute passed into the component will be passed to <code>$props</code> object. Here we used <code>&lt;template&gt;</code> for our <code>:for</code> loop because ColonJs components cannot be used together with <code>:for</code> or <code>:if</code> directives unless its wrapped in a template.</p>
+<p>The app has been split into two smaller pieces and the child decoupled from the parent. The `&lt;Todo-Item&gt;` component can now be improved and complexified with no effect on the parent app.</p>
+<p>When creating a large application, it should be divided into components for the sake of manageability. The following is an example of an app template that uses components:</p>
+<pre class="hljs html">
+&lt;div id="app"&gt;
+	&lt;App-Side-Bar&gt;&lt;/App-Side-Bar&gt;
+	&lt;App-Content&gt;&lt;/App-Content&gt;
+&lt;/div&gt;
+</pre>
+
+<p>The basic features of ColonJs are covered in this guide; more advanced features will be covered in next lessons.</a>.</p>
+<p>If you would like to contribute or make a correction, feel free to <a href="https://github.com/nesovera/colonjs.org">join our github pages</a></p>
