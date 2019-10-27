@@ -17,7 +17,7 @@ window.app = new Colon({
         this.data.activeVersion = path.split("/")[1] || this.data.activeVersion;
         this.data.activePageSlug = path.split("/")[2] || "";
         const activePage = this.methods.getActiveVersionPageList().find(v=>v.slug === this.data.activePageSlug);
-        const activePageFile = "/"+this.data.activeVersion+'/'+activePage.file;
+        const activePageFile = "/versions/"+this.data.activeVersion+'/'+activePage.file;
         fetch(activePageFile)
             .then(res=>res.text())
             .then(data=>{
