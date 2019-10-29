@@ -6,9 +6,9 @@ window.app = new Colon({
         activePage: { html: 'Loading...' },
         pageList:{
             v0: [
-                { name:"Home", slug:"", file:"Home.html" },
-                { name:"Installation", slug:"installation", file:"Installation.html" },
-                { name:"Getting Started", slug:"getting-started", file:"GettingStarted.html" },
+                { name:"Home", slug:"", file:"Home.html", title:"ColonJS: Micro Front End Framework (3kb)" },
+                { name:"Installation", slug:"installation", file:"Installation.html", title:"Installation | ColonJS" },
+                { name:"Getting Started", slug:"getting-started", file:"GettingStarted.html", title:"Getting Started | ColonJS" },
             ],
         },
     },
@@ -23,6 +23,7 @@ window.app = new Colon({
             .then(data=>{
                 activePage.html = data;
                 this.data.activePage = activePage;
+                document.querySelector("title").innerText = activePage.title;
                 this.render();
             });
         hljs.configure({tabReplace: '  '});
